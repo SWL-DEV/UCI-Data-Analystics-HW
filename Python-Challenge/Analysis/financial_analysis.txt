@@ -1,0 +1,5 @@
+Total months: 86
+Total amount: $38382578
+Average change: -2288.1976744186045
+Greatest Increase in Profits: ('Apr-2010', 379920)
+Greatest Decrease in Losses: ('Sep-2016', -665765)
