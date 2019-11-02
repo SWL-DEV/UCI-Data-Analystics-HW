@@ -40,12 +40,22 @@ app = Flask(__name__)
 def welcome():
     """List all available api routes."""
     return (
-        f"Available Routes:<br/>"
+        f"Welcome to the Hawaii Temperature API<br/>"
+        f"<br/>"
+        f"<br/>"
+        f"Available Preset Routes:<br/>"
+        f"==============================<br/>"
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
-        f"/api/v1.0/<start><br/>"
-        f"/api/v1.0/<start>/<end>"
+        f"<br/>"
+        f"Please enter dates in between < > as yyyy-mm-dd for customized info<br/>"
+        f"==============================<br/>"
+        f"Data for one day:<br/>"
+        f"/api/v1.0/< <start> ><br/>"
+        f"<br/>"
+        f"Data between start and end days:<br/>"
+        f"/api/v1.0/< <start> >/< <end> >"
     )
 
 
@@ -128,10 +138,36 @@ def calc_temps(start):
     session = Session(engine)
 
     # Calculate `TMIN`, `TAVG`, and `TMAX` for all dates greater than and equal to the start date
-    canonicalized = start.replace("/","-")
-    canonicalized2 = f"{start[0:4]}-{start[4:6]}-{start[6:8]}"
     
-    results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).filter(Measurement.date >= start).all()
+    # Account for alternate date formate entered without dashes in between yyyy-mm-dd
+
+    # canonicalized = f"{start[0:4]}-{start[4:6]}-{start[6:8]}"
+    
+    results = session.query(Measurement.date, func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).filter(Measurement.date >= start).all()
+
+    session.close()
+    
+    one_year_temp_calc = []
+    for date, tmin, tavg, tmax in results:
+        one_year_temp_calc_dict = {}
+        one_year_temp_calc_dict["date"] = date
+        one_year_temp_calc_dict["tmin"] = tmin
+        one_year_temp_calc_dict["tavg"] = tavg
+        one_year_temp_calc_dict["tmax"] = tmax
+        one_year_temp_calc.append(one_year_temp_calc_dict)
+
+    return jsonify(one_year_temp_calc)
+
+
+
+@app.route("/api/v1.0/<start>/<end>")
+def calc_temps2(start,end):
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # Calculate `TMIN`, `TAVG`, and `TMAX` for all dates within the date range
+    
+    results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).filter(Measurement.date >= start).filter(Measurement.date <= end).all()
 
     session.close()
     
@@ -143,41 +179,8 @@ def calc_temps(start):
         one_year_temp_calc['tmax'] = tmax
         one_year_temp_calc.append(one_year_temp_calc_dict)
 
-        if start == canonicalized or start == canonicalized2:
-            return jsonify(one_year_temp_calc)
+    return jsonify(one_year_temp_calc)
 
-    return jsonify({"error": "date not found."}), 404
-
-
-# @app.route("/api/v1.0/<start>/<end>")
-# def calc_temps2(start,end)
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
-
-#     # Calculate `TMIN`, `TAVG`, and `TMAX` for all dates greater than and equal to the start date
-#     start1 = start.replace("/","-")
-#     start2 = f"{start[0:4]}-{start[4:6]}-{start[6:8]}"
-
-#     end1 = end.replace("/","-")
-#     end2 = f"{end[0:4]}-{end[4:6]}-{end[6:8]}"
-    
-#     results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).filter(Measurement.date >= start).filter(Measurement.date <= end).all()
-
-#     session.close()
-    
-#     one_year_temp_calc = []
-#     for tmin, tavg, tmax in results:
-#         one_year_temp_calc_dict = {}
-#         one_year_temp_calc['tmin'] = tmin
-#         one_year_temp_calc['tavg'] = tavg
-#         one_year_temp_calc['tmax'] = tmax
-#         one_year_temp_calc.append(one_year_temp_calc_dict)
-
-#         if start == (start1 or start2) and end == (end1 or end2):
-
-#             return jsonify(one_year_temp_calc)
-
-#     return jsonify({"error": "date not found."}), 404
 
 
 if __name__ == "__main__":
