@@ -1,0 +1,63 @@
+/* Navbar */
+.navbar{
+    max-height: 62px;
+    background-color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #f1f1f1;
+    font-weight: 5;
+    font-size: 17px;
+    text-align: start;
+    padding-right: 50px;
+}
+
+.navigation .navbar-brand{
+    color: white;
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    background-color: #36a7b2;
+    margin-left: 50px;
+    padding: inherit;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navigation .navbar-brand:hover{
+    color: #606060;
+}
+
+/* Body */
+body{
+    background-color: #f1f1f1; 
+}
+
+.card-title{
+    color: #36a7b2;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+.card-body{
+    color: #696969;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+
+}
+
+.page-footer{
+    min-height: 62px;
+    background-color: #585857;
+    text-align: center;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    border-top-style: solid;
+    border-top-color: #36a7b2;
+    border-top-width: 5px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
