@@ -37,15 +37,44 @@ body{
     color: #36a7b2;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-.card-body{
+.card-text{
     color: #696969;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 16px;
-
+    line-height: 1.75em;
+    margin-left: 15px;
+    margin-right: 15px;
+    text-align: justify;
 }
 
+
+.img-fluid:hover{
+    border-width: 3px;
+    border-color: #36a7b2;
+    border-style: solid;
+}
+
+#toTopBtn{
+    position: fixed;
+    bottom: 10%;
+    float: right;
+    right: 3%;
+    color: white;
+    background-color: #36a7b2;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+}
+
+#toTopBtn:hover {
+    background-color:#585857;
+}
+
+/* Footer */
 .page-footer{
     min-height: 62px;
     background-color: #585857;
@@ -60,4 +89,5 @@ body{
     right: 0;
     bottom: 0;
 }
+
 
