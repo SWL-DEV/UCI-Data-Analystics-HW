@@ -86,9 +86,17 @@ def mars_weather():
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
 
-    # Find contents within each tweet
+    # Find all contents that include the 
     contents = soup.find_all('div', class_='js-tweet-text-container')
-    mars_weather = content.find('p', class_='TweetTextSize').text
+
+    for content in contents:    
+        mars_weather = content.find('p', class_='TweetTextSize').text
+        if 'InSight' in mars_weather:
+                
+            print('--------------------')
+            print(mars_weather)
+        else:
+            pass
 
     mars_update['mars_weather'] = mars_weather
 

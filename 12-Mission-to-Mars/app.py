@@ -1,22 +1,29 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
+from flask_pymongo import pymongo
+import scrape_mars
 
-# Import pymongo library to connect the Flask app to Mongo database
-import pymongo
+# Use flask_pymongo to set up mongo connection
+app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_app"
+mongo = PyMongo(app)
 
-# Create an instance of Flask app
-app = Flask(__name__)
+@app.route("/")
+def index():
+    mars_update = mongo.db.mars_update.find_one()
+    return render_template("index.html", mars_update=mars_update)
 
-# Create connection variable
-conn = 'mongodb://localhost:27017'
 
-# Pass connection to the pymongo instance
-client = pymongo.MongoClient(conn)
+@app.route("/scrape")
+def scrape():
+    mars_update = mongo.db.mars_update
+    mars_update_data = scrape_mars.scrape()
+    mars_update.update({}, mars_update_data, upsert=True)
+    return redirect("/", code=302)
 
-# Connect to Mars News Database. Create one if not already available
-db = client.mars_db
 
-# Drop collection if available to remove duplicates
-db.mars.drop()
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
 
 
 
