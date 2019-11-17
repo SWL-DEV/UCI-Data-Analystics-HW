@@ -14,7 +14,7 @@ Use MongoDB with Flask templating to create a new HTML page that displays all of
 
 
 ### Mars Weather
-* Display the lastest tweet from the Mars Weather twitter account
+* Display the lastest tweet from the [Mars Weather](https://twitter.com/marswxreport?lang=en) twitter account
 
 
 ### Mars Facts
