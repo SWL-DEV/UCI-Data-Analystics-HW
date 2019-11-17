@@ -20,7 +20,7 @@ def scrape():
     mars_data = scrape_mars.scrape()
     mars_update.update({}, mars_data, upsert=True)
 
-    return redirect("/", code=302)
+    return redirect("/")
 
 
 if __name__ == "__main__":
