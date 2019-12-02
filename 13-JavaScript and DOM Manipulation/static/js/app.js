@@ -1,6 +1,3 @@
-// from data.js
-var tableData = data;
-
 // var data = [{
 //     datetime: "1/1/2010",
 //     city: "benton",
@@ -11,9 +8,10 @@ var tableData = data;
 //     comments: "4 bright green circles high in the sky going in circles then one bright green light at my front door."
 //   },
 
+// from data.js
+var tableData = data;
+
 // YOUR CODE HERE!
-
-
 var button = d3.select('#filter-btn');
 
 button.on("click", function() {
@@ -35,5 +33,18 @@ button.on("click", function() {
   
   console.log(filteredData);
 
+  // Get a reference to the table body
+  var tbody = d3.select("tbody");
 
+  // Loop through the filteredData
+  filteredData.forEach((data) => {
+    // For each sighting, add a new row
+    var row = tbody.append("tr");
+    // For each sighting's date (key) and relevant values
+    Object.entries(data).forEach(([key, value]) => {
+      // Add a new cell for each value
+      var cell = row.append("td");
+        cell.text(value);
+    });
+  });
 });
