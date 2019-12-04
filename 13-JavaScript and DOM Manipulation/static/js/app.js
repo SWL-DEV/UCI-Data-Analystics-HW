@@ -12,9 +12,13 @@
 var tableData = data;
 
 // YOUR CODE HERE!
+
 var button = d3.select('#filter-btn');
 
 button.on("click", function() {
+
+  // Clear out existing table content if a previous query was run 
+  d3.select("tbody").selectAll("*").remove()
 
   // Select the input element and get the raw HTML node
   var inputElement = d3.select("#datetime");
@@ -38,13 +42,20 @@ button.on("click", function() {
 
   // Loop through the filteredData
   filteredData.forEach((data) => {
+
     // For each sighting, add a new row
     var row = tbody.append("tr");
+
     // For each sighting's date (key) and relevant values
     Object.entries(data).forEach(([key, value]) => {
+
       // Add a new cell for each value
       var cell = row.append("td");
         cell.text(value);
+
+    
     });
+
   });
+
 });
