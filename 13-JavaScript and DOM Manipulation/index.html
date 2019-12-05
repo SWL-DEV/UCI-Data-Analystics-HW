@@ -36,9 +36,45 @@
                   <div class="form-group">
                     <ul class="list-group" id="filters">
                       <li class="filter list-group-item">
-                        <label for="date">Enter a Date</label>
-                        <input class="form-control" id="datetime" type="text" placeholder="1/11/2011">
+                        <label for="keyword">Enter Search Key</label>
+                        <input class="form-control" id="keyword" type="text" placeholder="keyword">
                       </li>
+                      <!-- Attempt at multi search box
+                      <li class="filter list-group-item">                      
+                          <label for="keyword">Enter Search Key</label>
+                        <div class = "form-row">
+                          <label for ="datetime">Date</label>
+                        <input class="form-control" id="datetime" type="text" placeholder="1/11/2010">
+                      </div>
+
+                      <div class = "form-row">
+                          <label for ="city">City</label>
+                        <input class="form-control" id="city" type="text" placeholder="san diego">
+                      </div>
+
+                      <div class = "form-row">
+                          <label for ="state">State</label>
+                        <input class="form-control" id="state" type="text" placeholder="ca">
+                      </div>
+
+                      <div class = "form-row">
+                          <label for ="country">Country</label>
+                        <input class="form-control" id="country" type="text" placeholder="us">
+                      </div>
+
+                      <div class = "form-row">
+                          <label for ="shape">Shape</label>
+                        <input class="form-control" id="shape" type="text" placeholder="round">
+                      </div>
+                      </li> -->
+                    </ul>
+                    <ul class="list-group" style="font-size:x-small;">
+                      <li class="list-group-item">Key Samples:</li>
+                      <li class="list-group-item">Date: 1/11/2010</li>
+                      <li class="list-group-item">City: san diego</li>
+                      <li class="list-group-item">State: ca</li>
+                      <li class="list-group-item">Country: us</li>
+                      <li class="list-group-item">Shape: round</li>
                     </ul>
                   </div>
                   <button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
