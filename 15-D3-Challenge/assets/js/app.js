@@ -112,8 +112,6 @@ d3.csv("assets/data/data.csv").then(function(healthData, err) {
 
     // parse data
     healthData.forEach(function(data) {
-        // data.state = data.state;
-        // data.abbr = data.abbr;
         data.poverty = +data.poverty;
         data.age = +data.age;
         data.income = +data.income;
