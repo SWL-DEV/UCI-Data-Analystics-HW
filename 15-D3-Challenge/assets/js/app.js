@@ -112,8 +112,8 @@ d3.csv("assets/data/data.csv").then(function(healthData, err) {
 
     // parse data
     healthData.forEach(function(data) {
-        data.state = data.state;
-        data.abbr = data.abbr;
+        // data.state = data.state;
+        // data.abbr = data.abbr;
         data.poverty = +data.poverty;
         data.age = +data.age;
         data.income = +data.income;
@@ -163,7 +163,7 @@ d3.csv("assets/data/data.csv").then(function(healthData, err) {
                 .attr("y", d => yLinearScale(d[chosenYAxis]))
                 .attr("font-size", "8px")
                 .attr("style", "strong")
-                .text((d) => (d.abbr));
+                .text((d) => d.abbr);
     
     // Create group for 3 x- axis labels
     var labelsGroup = chartGroup.append("g")
@@ -225,7 +225,7 @@ d3.csv("assets/data/data.csv").then(function(healthData, err) {
         .text("Obese (%)");
 
     // Update ToolTip function above csv import
-    var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+    var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
     // x axis labels event listener
     labelsGroup.selectAll("text")
@@ -250,7 +250,7 @@ d3.csv("assets/data/data.csv").then(function(healthData, err) {
                 circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
 
                 // updates tooltips with new info
-                circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+                circlesGroup = updateToolTip(chosenXAxis, chonsenYAxis, circlesGroup);
 
                 // changes classes to change bold text
                 if (chosenXAxis === "poverty") {
